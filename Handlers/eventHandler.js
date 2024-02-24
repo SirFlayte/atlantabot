@@ -27,6 +27,7 @@ function loadEvents(client) {
                        event.execute(...args, client))
             }
             table.addRow(file, "loaded");
+            continue;
         }
     }
     return console.log(table.toString(), "\nLoaded events")
