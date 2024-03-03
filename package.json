@@ -12,6 +12,7 @@
   "dependencies": {
     "@discordjs/builders": "^1.7.0",
     "ascii-table": "^0.0.9",
-    "discord.js": "^14.10.2"
+    "discord.js": "^14.10.2",
+    "mongoose": "^6.5.4"
   }
 }
