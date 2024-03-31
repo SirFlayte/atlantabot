@@ -2,18 +2,18 @@ const {SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits} = require('discor
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("kick")
-        .setDescription("Kick a user from the discord server")
-        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+        .setName("ban")
+        .setDescription("Ban a user from the discord server")
+        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
         .addUserOption(option =>
             option.setName("target")
-                .setDescription("User to be kicked.")
+                .setDescription("User to be banned.")
                 .setRequired(true)
         )
         .addStringOption(option => option.setName("reason")
-            .setDescription("Reason for the kick")),
+            .setDescription("Reason for the ban")),
     async execute(interaction) {
-        const {channel, options} = interaction;
+        const {channel, options} = interaction
 
         const user = options.getUser("target");
         const reason = options.getString("reason") || "No reason provided";
@@ -26,10 +26,10 @@ module.exports = {
         if (member.roles.highest.position >= interaction.member.roles.highest.position) {
             return interaction.reply({embeds: [errEmbed], ephemeral: true});
         }
-        await member.kick(reason);
+        await member.ban({reason})
 
         const embed = new EmbedBuilder()
-            .setDescription(`Successfully kicked ${user} with reason: ${reason}`)
+            .setDescription(`Successfully banned ${user} with reason: ${reason}`)
             .setTimestamp()
             .setColor(0x5fb041)
         await interaction.reply({
